@@ -73,7 +73,7 @@ const VideoDetails = () => {
             <div className="text-white font-bold text-sm md:text-xl mt-4 line-clamp-2">
               {video?.title}
             </div>
-            <div className="flex justify-between flex-col md:flex-row mt-6">
+            <div className="flex justify-between flex-col md:flex-row mt-8">
               <div className="flex">
                 <div className="flex items-start">
                   <div className="flex h-11 w-11 rounded-full overflow-hidden">
