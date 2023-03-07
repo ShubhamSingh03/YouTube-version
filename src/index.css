@@ -20,25 +20,27 @@ code {
     monospace;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
+@media screen and (min-width: 720px) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #1c1c1c;
-}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #1c1c1c;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 
 .load-bar {
@@ -90,6 +92,24 @@ code {
 .custom-h {
   height: auto !important;
 }
+
+.emoji-429 {
+  position: relative;
+  animation: mymove 2.5s infinite;
+}
+
+@keyframes mymove {
+  33% {
+    top: 0px;
+  }
+  66% {
+    top: 20px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .custom-h {
     height: 100vh !important;
