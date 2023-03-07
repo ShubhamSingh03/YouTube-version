@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 
 // react-router
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import toast from "react-hot-toast";
 
 // components
 import LeftNavMenuItem from "./LeftNavMenuItem";
-
-import { ImSwitch } from "react-icons/im";
 
 // utilities
 import { categories } from "../../../utils/constants";
@@ -18,8 +16,7 @@ import { Context } from "../../../context/contextApi";
 import { UserContext } from "../../../context/userContext";
 
 const LeftNav = () => {
-  const { selectedCategory, setSelectedCategory, mobileMenu } =
-    useContext(Context);
+  const { selectedCategory, setSelectedCategory } = useContext(Context);
 
   const userContext = useContext(UserContext);
 
@@ -33,6 +30,8 @@ const LeftNav = () => {
         return setSelectedCategory(name);
       case "menu":
         return false;
+      case "logout":
+        return setSelectedCategory(name);
       default:
         break;
     }
@@ -40,7 +39,7 @@ const LeftNav = () => {
 
   return (
     <div
-      className={`md:block w-[240px] overflow-y-auto h-full py-4 bg-black absolute md:relative z-10 translate-x-[-240px] md:translate-x-0 transition-all ${ mobileMenu ? "translate-x-0" : ""}`}
+      className={`md:block w-[240px] overflow-y-auto h-full py-4 bg-black absolute md:relative z-999 transition-all`}
     >
       <div className="flex px-5 flex-col">
         {categories.map((item) => {
@@ -49,10 +48,19 @@ const LeftNav = () => {
               <LeftNavMenuItem
                 text={item.type === "home" ? "Home" : item.name}
                 icon={item.icon}
-                action={() => {
-                  clickHandler(item.name, item.type);
-                  navigate("/home"); // ("/")
-                }}
+                action={
+                  item.type === "logout"
+                    ? () => {
+                        userContext.setUser(null);
+
+                        toast.success("Logout Successfull !");
+                        navigate("/signin");
+                      }
+                    : () => {
+                        clickHandler(item.name, item.type);
+                        navigate("/home");
+                      }
+                }
                 className={`${
                   selectedCategory === item.name ? "bg-white/[0.15]" : ""
                 }`}
@@ -62,22 +70,6 @@ const LeftNav = () => {
           );
         })}
         <hr className="my-4 border-white/[0.2]" />
-        <div className="text-white/[0.5] text-[12px]">
-          <Link
-            to="/signin"
-            onClick={() => {
-              userContext.setUser(null);
-              toast.success("Logout Successfull !");
-            }}
-            className="flex justify-center"
-          >
-            <ImSwitch
-              className="text-white text-xl cursor-pointer mr-2"
-              title="Log Out"
-            />{" "}
-            LOGOUT
-          </Link>
-        </div>
       </div>
     </div>
   );

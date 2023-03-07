@@ -15,6 +15,7 @@ import { UserContext } from "../../context/userContext";
 
 // components
 import Loader from "../../shared/loader";
+import LeftNav from "./leftNav/LeftNav";
 
 // images & react - icons
 import ytLogo from "../../images/yt-logo.png";
@@ -31,19 +32,22 @@ import { CgClose } from "react-icons/cg";
  *
  ******************************************************/
 const Header = () => {
-  const { loading, mobileMenu, setMobileMenu } = useContext(Context);
+  const { loading } = useContext(Context);
 
   const { user, setUser } = useContext(UserContext);
 
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [isLeftNavOpen, setIsLeftNavOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
+
   const pageName = pathname?.split("/")?.filter(Boolean)?.[0];
 
   /******************************************
-   *
+   * search query handler
    *****************************************/
   const searchQueryHandler = (event) => {
     if (
@@ -96,26 +100,25 @@ const Header = () => {
     );
   };
 
-  /*****************************************
-   * mobile menu toggler
-   ****************************************/
-  const mobileMenuToggle = () => {
-    setMobileMenu(!mobileMenu);
-  };
-
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} duration={4000} />
       <div className="sticky top-0 z-10 flex flex-row items-center justify-between h-14 px-2 md:px-5 bg-black">
         {loading && <Loader />}
-
         <div className="flex h-5 items-center">
           {pageName !== "video" && (
             <div
               className="flex md:hidden md:mr-6 cursor-pointer items-center justify-center h-10 w-10 rounded-full hover:bg-[#303030]/[0.6]"
-              onClick={mobileMenuToggle}
+              onClick={() => setIsLeftNavOpen(!isLeftNavOpen)}
             >
-              {mobileMenu ? (
+              <div
+                className={`w-[240px] h-full bg-black fixed left-0 top-12 transition-all duration-300 ${
+                  isLeftNavOpen ? "translate-x-0" : "-translate-x-[240px]"
+                }`}
+              >
+                <LeftNav />
+              </div>
+              {isLeftNavOpen ? (
                 <CgClose className="text-white text-xl" />
               ) : (
                 <SlMenu className="text-white text-xl" />
@@ -178,7 +181,11 @@ const Header = () => {
           </div>
           <div className="flex h-8 w-8 overflow-hidden rounded-full md:ml-4">
             {user.photoURL ? (
-              <img src={user.photoURL} alt="Profile" title="Your Profile image" />
+              <img
+                src={user.photoURL}
+                alt="Profile"
+                title="Your Profile image"
+              />
             ) : (
               <div
                 style={{
