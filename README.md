@@ -8,9 +8,9 @@ This YouTube clone app built with React, Tailwindcss, Rapid API, and Firebase Au
 
 ## Links for Project
 
-- ### 📌 [LIVE Project Link]()
+- ### 📌 [LIVE Project Link](https://ytclonewithauth.netlify.app/)
 
-- ### 📌 [YouTube Link]()
+- ### 📌 [YouTube Link](https://youtu.be/qop9iV3RnQY)
 
 ## Tech Stack Used
 
@@ -48,9 +48,9 @@ This YouTube clone app built with React, Tailwindcss, Rapid API, and Firebase Au
 
 ![Video Details Page](./src/images/screeencaptures/Video-details-page.png)
 
-#### [VISIT WEBISTE HERE]()
+#### [VISIT WEBISTE HERE](https://ytclonewithauth.netlify.app/)
 
-#### [WACTH DEMO HERE]()
+#### [WACTH DEMO HERE](https://youtu.be/qop9iV3RnQY)
 
 ## Checkout Portfolio & Other Projects
 
